@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { JWT_PASSWORD } from "./config";
 
-export function authMiddleware (req: Request, res: Response, next: NextFunction) {
+export function authMiddleware (req: any, res: any, next: any) {
     const token = req.headers.authorization as unknown as string;
     
     try {
