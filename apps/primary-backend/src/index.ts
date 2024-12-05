@@ -12,4 +12,4 @@ app.use("/api/v1/user",userRouter);
 
 app.use("/api,v1,zap",zapRouter);
 
-app.listen(3002);
+app.listen(3004);

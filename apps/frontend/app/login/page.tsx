@@ -6,9 +6,14 @@ import { SigninAppbar } from "../../components/SigninAppbar";
 import { InputBox } from "../../components/InputBox";
 import { PrimaryButton } from "../../components/button/PrimaryButton";
 import { Link } from "../../components/Link";
+import { useState } from "react";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
 
 
 export default function LoginPage() {
+    const [email,setEmail] = useState("");
+    const [password,setPassword] = useState("");
     const router = useRouter();
     return (
         <div className="min-h-screen">
@@ -39,13 +44,23 @@ export default function LoginPage() {
                         </div>
                         <div className="border p-6 rounded shadow-lg bg-gray-100">
                             <div className="mb-4">
-                                <InputBox label={"Email"} type={"email"} placeholder={"xyz123@gmail.com"} onChange={(e) => {}} />
+                                <InputBox label={"Email"} type={"email"} placeholder={"xyz123@gmail.com"} onChange={(e) => {
+                                    setEmail(e.target.value);
+                                }} />
                             </div>
                             <div className="mb-4">
-                                <InputBox label={"Password"} type={"password"} placeholder={"**********"} onChange={(e) => {}} />
+                                <InputBox label={"Password"} type={"password"} placeholder={"**********"} onChange={(e) => {
+                                    setPassword(e.target.value);
+                                }} />
                             </div>
                             <div className="pt-6">
-                                <PrimaryButton onClick={() => {}}>Log in</PrimaryButton>
+                                <PrimaryButton onClick={async () => {
+                                    const response = await axios.post(`${BACKEND_URL}/api/v1/user/signin`,{
+                                        email,
+                                        password
+                                    });
+                                    router.push("/dashboard");
+                                }}>Log in</PrimaryButton>
                             </div>
                         </div>
                         <div className="pt-4 flex">
