@@ -7,6 +7,7 @@ import { BACKEND_URL } from "../config";
 import { DarkButton } from "../../components/button/DarkButton";
 import { useRouter } from "next/navigation";
 import { ZapTable } from "../../components/ZapTable";
+import { ZapTableAppbar } from "../../components/ZapTableAppbar";
 
 function useZaps(){
     const [loading,setLoading] = useState(true);
@@ -35,18 +36,19 @@ export default function() {
     const router = useRouter();
 
     return <div>
-    <div className="flex justify-center pt-8">
-        <div className="max-w-screen-lg	 w-full">
-            <div className="flex justify-between pr-8 ">
-                <div className="text-2xl font-bold">
-                    My Zaps
-                </div>
-                    <DarkButton onClick={() => {
-                    router.push("/zap/create");
-                    }}>Create</DarkButton>
+        <ZapTableAppbar />
+        <div className="flex justify-center pt-8">
+            <div className="max-w-screen-lg	 w-full">
+                <div className="flex justify-between pr-8 ">
+                    <div className="text-2xl font-bold">
+                        My Zaps
+                    </div>
+                        <DarkButton onClick={() => {
+                        router.push("/zap/create");
+                        }}>Create</DarkButton>
+                    </div>
                 </div>
             </div>
-        </div>
-        {loading ? "Loading..." : <div className="flex justify-center"> <ZapTable zaps={zaps} /> </div>}
+            {loading ? "Loading..." : <div className="flex justify-center"> <ZapTable zaps={zaps} /> </div>}
     </div>
 }
